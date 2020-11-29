@@ -195,6 +195,7 @@ ALTER TABLE `tags`
 --
 ALTER TABLE `userlog`
   ADD KEY `AuthenticationID` (`AuthenticationID`);
+  add constraint `userlog_ibfk_1` foreign key (`AuthenticationID`) references `usersinfo` (`AuthenticationID`)
 
 --
 -- Tablo için indeksler `users`
