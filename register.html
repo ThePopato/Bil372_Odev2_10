@@ -1,0 +1,46 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <title>Kayıt Olun!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  <div class="container">
+    <form class="form-signin_up" method="post" action="#">       
+      <h2 class="form-signin_up-heading">Yeni Hesap Oluştur.</h2>
+	  <br></br>
+	  <label>Kullanıcı Adı: </label>
+      <input type="text" class="form-control" name="name" required="" autofocus="" />
+	  <label>Sifre: </label>
+      <input type="password" class="form-control" name="password" required="" autofocus="" />
+	  <label>Kurum Adı: </label>
+      <input type="text" class="form-control" name="affiliation " required="" autofocus="" />
+	  <label>Unvan: </label>
+      <input type="text" class="form-control" name="title" required="" autofocus="" />
+	  <label>Adı/Soyadı: </label>
+      <input type="text" class="form-control" name="responsName" required=""/>
+	  <label>Email: </label>
+	  <input type="email" class="form-control" name="email1" required="" autofocus="" />
+	  <label>Ikinci Email: </label>
+	  <input type="email" class="form-control" name="email2" required="" autofocus="" />
+	  <label>Telefon: </label>
+	  <input type="tel" class="form-control" name="phone" required="" autofocus="" />
+	  <label>Faks: </label>
+	  <input type="tel" class="form-control" name="faks" required="" autofocus="" />
+	  <label>Adres: </label>
+	  <textarea class="form-control" id="adres" name="address" rows="3"></textarea>
+	  <label>Ulke: </label>
+      <input type="text" class="form-control" name="ulkeAdi" required=""/>
+	  <label>Sehir: </label>
+      <input type="text" class="form-control" name="sehir" required=""/>
+	  <br></br>
+	  <button class="btn btn-lg btn-primary btn-block" type="submit">Kayıt Ol</button>
+	  <p></p>
+	  <a href="login.html">Giriş Yapın!</a>   
+    </form>
+  </div>
