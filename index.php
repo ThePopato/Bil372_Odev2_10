@@ -1,23 +1,15 @@
-<?php  include('server.php'); ?>
+<?php  include('create_conferenceroles.php'); ?>
 <?php
 $db = mysqli_connect('localhost', 'root', '', 'odev2');
 if (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
+    $ConfIDRole = $_GET['edit'];
     $update = true;
-    $record = mysqli_query($db, "SELECT * FROM conference WHERE ConfID=$id");
+    $record = mysqli_query($db, "SELECT * FROM conferenceroles WHERE ConfIDRole=$ConfIDRole");
 
     if (count($record) == 1 ) {
         $n = mysqli_fetch_array($record);
-        $ConfID = $n['ConfID'];
-        $CreationDateTime = $n['CreationDateTime'];
-        $Name = $n['Name'];
-        $ShortName = $n['ShortName'];
-        $Year = $n['Year'];
-        $StartDate = $n['StartDate'];
-        $EndDate = $n['EndDate'];
-        $SubmissionDeadline = $n['SubmissionDeadline'];
-        $CreatorUser = $n['CreatorUser'];
-        $WebSite = $n['WebSite'];
+        $ConfIDRole = $n['ConfIDRole'];
+        $AuthenticationID = $n['AuthenticationID'];
     }
 }
 ?>
@@ -36,87 +28,38 @@ if (isset($_GET['edit'])) {
         ?>
     </div>
 <?php endif ?>
-<?php
-$db =mysqli_connect('localhost', 'root', '', 'odev2');
-$results = mysqli_query($db, "SELECT * FROM conference"); ?>
+<?php $db =mysqli_connect('localhost', 'root', '', 'crud');
+$results = mysqli_query($db, "SELECT * FROM conferenceroles"); ?>
 <table>
     <thead>
     <tr>
-        <th>ConfID</th>
-        <th>CreationDateTime</th>
-        <th>Name</th>
-        <th>ShortName</th>
-        <th>Year</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>SubmissionDeadline</th>
-        <th>CreatorUser</th>
-        <th>WebSite</th>
-        <th colspan="10">Action</th>
+        <th>ConfIDRole</th>
+        <th>Address</th>
+        <th colspan="2">Action</th>
     </tr>
     </thead>
 
     <?php while ($row = mysqli_fetch_array($results)) { ?>
         <tr>
-            <td><?php echo $row['ConfID']; ?></td>
-            <td><?php echo $row['CreationDateTime']; ?></td>
-            <td><?php echo $row['Name']; ?></td>
-            <td><?php echo $row['ShortName']; ?></td>
-            <td><?php echo $row['Year']; ?></td>
-            <td><?php echo $row['StartDate']; ?></td>
-            <td><?php echo $row['EndDate']; ?></td>
-            <td><?php echo $row['SubmissionDeadline']; ?></td>
-            <td><?php echo $row['CreatorUser']; ?></td>
-            <td><?php echo $row['WebSite']; ?></td>
+            <td><?php echo $row['ConfIDRole']; ?></td>
+            <td><?php echo $row['AuthenticationID']; ?></td>
             <td>
-                <a href="index.php?edit=<?php echo $row['ConfID']; ?>" class="edit_btn" >Edit</a>
+                <a href="index.php?edit=<?php echo $row['ConfIDRole']; ?>" class="edit_btn" >Edit</a>
             </td>
             <td>
-                <a href="server.php?del=<?php echo $row['ConfID']; ?>" class="del_btn">Delete</a>
+                <a href="server.php?del=<?php echo $row['ConfIDRole']; ?>" class="del_btn">Delete</a>
             </td>
         </tr>
     <?php } ?>
 </table>
-<form method="post" action="server.php" >
+<form method="post" action="create_conferenceroles.php" >
     <div class="input-group">
-        <label>ConfID</label>
-        <input type="text" name="ConfID" value="<?php echo $ConfID; ?>">
+        <label>ConfIDRole</label>
+        <input type="number" name="ConfIDRole" value="<?php echo $ConfIDRole; ?>">
     </div>
     <div class="input-group">
-        <label>CreationDateTime</label>
-        <input type="date" name="CreationDateTime" value="<?php echo $CreationDateTime; ?>">
-    </div>
-    <div class="input-group">
-        <label>Name</label>
-        <input type="text" name="Name" value="<?php echo $Name; ?>">
-    </div>
-    <div class="input-group">
-        <label>ShortName</label>
-        <input type="text" name="ShortName" value="<?php echo $ShortName; ?>">
-    </div>
-    <div class="input-group">
-        <label>Year</label>
-        <input type="number" name="Year" value="<?php echo $Year; ?>">
-    </div>
-    <div class="input-group">
-        <label>StartDate</label>
-        <input type="date" name="StartDate" value="<?php echo $StartDate; ?>">
-    </div>
-    <div class="input-group">
-        <label>EndDate</label>
-        <input type="date" name="EndDate" value="<?php echo $EndDate; ?>">
-    </div>
-    <div class="input-group">
-        <label>Submission Deadline</label>
-        <input type="date" name="Submission_Deadline" value="<?php echo $SubmissionDeadline; ?>">
-    </div>
-    <div class="input-group">
-        <label>CreatorUser</label>
-        <input type="number" name="CreatorUser" value="<?php echo $CreatorUser; ?>">
-    </div>
-    <div class="input-group">
-        <label>WebSite</label>
-        <input type="text" name="WebSite" value="<?php echo $WebSite; ?>">
+        <label>AuthenticationID</label>
+        <input type="number" name="AuthenticationID" value="<?php echo $AuthenticationID; ?>">
     </div>
     <div class="input-group">
         <?php if ($update == true): ?>
