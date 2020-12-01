@@ -36,23 +36,31 @@ function filterTable($query)
                 border: 1px solid black;
             }
         </style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        
+        <div class="container">
         <form action="adminDisplayUsers.php" method="post">
-			
+			<br><br><br>
 			<label for="FilterBox">Choose a filter:</label>
-			<select name="filterBox" id="filterBox">
+			<select name="filterBox" class="form-control" id="filterBox">
 				<option value="Name">Name</option>
 				<option value="LastName">Lastname</option>
+				<option value="Title">Title</option>
 				<option value="City">City</option>
+				<option value="Country">Country</option>
+				<option value="Affiliation">Affiliation</option>
+				<option value="phone">Phone Number</option>
+				<option value="Address">Address</option>
 			</select>
 			<br><br>
-			<input type="text" name="searchValue" placeholder="Filter For Name"><br><br>
-			<input type="submit" name="search" value="Filter"><br><br>
+			<input type="text" class="form-control" name="searchValue" placeholder="Filter For Name"><br>
+			<input type="submit" class="button" name="search" value="Filter"><br><br><br>
 
 
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <th>Title</th>
                     <th>First Name</th>
@@ -85,6 +93,6 @@ function filterTable($query)
                 <?php endwhile;?>
             </table>
         </form>
-        
+        </div>
     </body>
 </html>
