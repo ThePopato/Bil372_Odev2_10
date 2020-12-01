@@ -37,7 +37,7 @@ function filterTable($query)
     </head>
     <body>
         
-        <form action="test.php" method="post">
+        <form action="adminDisplayUsers.php" method="post">
             <input type="text" name="nameSearch" placeholder="Filter For Name"><br><br>
             <input type="submit" name="search" value="Filter"><br><br>
             
