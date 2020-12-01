@@ -56,7 +56,7 @@ function filterTable($query)
 				<option value="Address">Address</option>
 			</select>
 			<br><br>
-			<input type="text" class="form-control" name="searchValue" placeholder="Filter For Name"><br>
+			<input type="text" class="form-control" name="searchValue" placeholder="Type your filter value"><br>
 			<input type="submit" class="button" name="search" value="Filter"><br><br><br>
 
 
