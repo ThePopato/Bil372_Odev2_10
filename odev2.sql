@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 24 Kas 2020, 00:03:25
+-- Üretim Zamanı: 01 Ara 2020, 17:49:33
 -- Sunucu sürümü: 10.4.14-MariaDB
 -- PHP Sürümü: 7.2.34
 
@@ -40,6 +40,13 @@ CREATE TABLE `conference` (
   `WebSite` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Tablo döküm verisi `conference`
+--
+
+INSERT INTO `conference` (`ConfID`, `CreationDateTime`, `Name`, `ShortName`, `Year`, `StartDate`, `EndDate`, `SubmissionDeadline`, `CreatorUser`, `WebSite`) VALUES
+('102030', '2020-12-06', 'ogrenci psikolojisi', 'ogrenci psi', 2020, '2020-12-10', '2020-12-17', '2020-12-08', 1234, 'https://zorlaniyorum.com');
+
 -- --------------------------------------------------------
 
 --
@@ -47,19 +54,25 @@ CREATE TABLE `conference` (
 --
 
 CREATE TABLE `conferenceroles` (
-  `ConfIDRole` int(11) NOT NULL,
+  `ConfID` varchar(20) NOT NULL,
+  `Role` int(11) NOT NULL,
   `AuthenticationID` bigint(20) UNSIGNED NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `conference_tags`
+-- Tablo için tablo yapısı `conferencetags`
 --
 
-CREATE TABLE `conference_tags` (
+CREATE TABLE `conferencetags` (
   `ConfID` varchar(20) NOT NULL,
-  `Tag` bigint(20) UNSIGNED NOT NULL
+  `Tag` varchar(100) NOT NULL,
+  `tag1` varchar(20) NOT NULL,
+  `tag2` varchar(20) NOT NULL,
+  `tag3` varchar(20) NOT NULL,
+  `tag4` varchar(20) NOT NULL,
+  `tag5` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -78,40 +91,26 @@ CREATE TABLE `submissions` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `tags`
---
-
-CREATE TABLE `tags` (
-  `tag` int(11) NOT NULL,
-  `tag1` varchar(20) NOT NULL,
-  `tag2` varchar(20) NOT NULL,
-  `tag3` varchar(20) NOT NULL,
-  `tag4` varchar(20) NOT NULL,
-  `tag5` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Tablo için tablo yapısı `userlog`
 --
 
 CREATE TABLE `userlog` (
   `AuthenticationID` bigint(20) UNSIGNED NOT NULL,
-  `Title` varchar(45) NOT NULL,
-  `Name` varchar(15) NOT NULL,
-  `LastName` varchar(15) NOT NULL,
-  `Affiliation primary_email` varchar(50) NOT NULL,
+  `Title` varchar(20) NOT NULL,
+  `Name` varchar(20) NOT NULL,
+  `LastName` varchar(20) NOT NULL,
+  `Affiliation` varchar(20) NOT NULL,
+  `primary_email` varchar(50) NOT NULL,
   `secondary_email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `phone` varchar(13) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `fax` varchar(20) NOT NULL,
-  `URL` varchar(120) NOT NULL,
-  `Address` varchar(50) NOT NULL,
+  `URL` varchar(50) NOT NULL,
+  `Address` varchar(20) NOT NULL,
   `City` varchar(20) NOT NULL,
   `Country` varchar(20) NOT NULL,
-  `Record` varchar(50) NOT NULL,
-  `Creation` varchar(30) NOT NULL,
+  `Record` varchar(20) NOT NULL,
+  `Creation` varchar(20) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -124,8 +123,15 @@ CREATE TABLE `userlog` (
 CREATE TABLE `users` (
   `AuthenticationID` bigint(20) UNSIGNED NOT NULL,
   `Username` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `Password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `users`
+--
+
+INSERT INTO `users` (`AuthenticationID`, `Username`, `Password`) VALUES
+(1234, 'elif', 'elif1234');
 
 -- --------------------------------------------------------
 
@@ -135,20 +141,21 @@ CREATE TABLE `users` (
 
 CREATE TABLE `usersinfo` (
   `AuthenticationID` bigint(20) UNSIGNED NOT NULL,
-  `Title` varchar(45) NOT NULL,
-  `Name` varchar(15) NOT NULL,
-  `LastName` varchar(15) NOT NULL,
-  `Affiliation primary_email` varchar(50) NOT NULL,
+  `Title` varchar(20) NOT NULL,
+  `Name` varchar(20) NOT NULL,
+  `LastName` varchar(20) NOT NULL,
+  `Affiliation` varchar(20) NOT NULL,
+  `primary_email` varchar(50) NOT NULL,
   `secondary_email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `phone` varchar(13) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `fax` varchar(20) NOT NULL,
-  `URL` varchar(120) NOT NULL,
-  `Address` varchar(50) NOT NULL,
+  `URL` varchar(50) NOT NULL,
+  `Address` varchar(20) NOT NULL,
   `City` varchar(20) NOT NULL,
   `Country` varchar(20) NOT NULL,
-  `Record` varchar(50) NOT NULL,
-  `Creation` varchar(30) NOT NULL,
+  `Record` varchar(20) NOT NULL,
+  `Creation` varchar(20) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -167,63 +174,52 @@ ALTER TABLE `conference`
 -- Tablo için indeksler `conferenceroles`
 --
 ALTER TABLE `conferenceroles`
-  ADD PRIMARY KEY (`ConfIDRole`,`AuthenticationID`),
+  ADD PRIMARY KEY (`ConfID`,`AuthenticationID`),
   ADD KEY `AuthenticationID` (`AuthenticationID`);
 
 --
--- Tablo için indeksler `conference_tags`
+-- Tablo için indeksler `conferencetags`
 --
-ALTER TABLE `conference_tags`
+ALTER TABLE `conferencetags`
   ADD PRIMARY KEY (`ConfID`,`Tag`),
-  ADD UNIQUE KEY `Tag` (`Tag`);
+  ADD KEY `Tag` (`Tag`);
 
 --
 -- Tablo için indeksler `submissions`
 --
 ALTER TABLE `submissions`
-  ADD PRIMARY KEY (`AuthenticationID`,`ConfID`,`SubmissionID`,`prevSubmissionID`),
+  ADD PRIMARY KEY (`AuthenticationID`,`SubmissionID`,`ConfID`,`prevSubmissionID`),
   ADD KEY `ConfID` (`ConfID`);
-
---
--- Tablo için indeksler `tags`
---
-ALTER TABLE `tags`
-  ADD PRIMARY KEY (`tag`);
 
 --
 -- Tablo için indeksler `userlog`
 --
 ALTER TABLE `userlog`
-  ADD KEY `AuthenticationID` (`AuthenticationID`);
-  add constraint `userlog_ibfk_1` foreign key (`AuthenticationID`) references `usersinfo` (`AuthenticationID`)
+  ADD PRIMARY KEY (`AuthenticationID`,`Title`,`Name`,`LastName`,`Affiliation`,`primary_email`,`secondary_email`,`password`,`phone`,`fax`,`URL`,`Address`,`City`,`Country`,`Record`,`Creation`,`Date`);
 
 --
 -- Tablo için indeksler `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`AuthenticationID`);
+  ADD PRIMARY KEY (`AuthenticationID`,`Password`),
+  ADD UNIQUE KEY `AuthenticationID` (`AuthenticationID`);
 
 --
 -- Tablo için indeksler `usersinfo`
 --
 ALTER TABLE `usersinfo`
-  ADD PRIMARY KEY (`AuthenticationID`);
+  ADD PRIMARY KEY (`AuthenticationID`),
+  ADD UNIQUE KEY `Title` (`Title`,`Name`,`LastName`,`Affiliation`,`primary_email`,`secondary_email`,`password`,`phone`,`fax`,`URL`,`Address`,`City`,`Country`,`Record`,`Creation`,`Date`);
 
 --
 -- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
 --
--- Tablo için AUTO_INCREMENT değeri `conference`
+-- Tablo için AUTO_INCREMENT değeri `users`
 --
-ALTER TABLE `conference`
-  MODIFY `CreatorUser` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `conference_tags`
---
-ALTER TABLE `conference_tags`
-  MODIFY `Tag` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `AuthenticationID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1235;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
@@ -239,32 +235,32 @@ ALTER TABLE `conference`
 -- Tablo kısıtlamaları `conferenceroles`
 --
 ALTER TABLE `conferenceroles`
-  ADD CONSTRAINT `conferenceroles_ibfk_1` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `conferenceroles_ibfk_1` FOREIGN KEY (`ConfID`) REFERENCES `conference` (`ConfID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `conferenceroles_ibfk_2` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Tablo kısıtlamaları `conference_tags`
+-- Tablo kısıtlamaları `conferencetags`
 --
-ALTER TABLE `conference_tags`
-  ADD CONSTRAINT `conference_tags_ibfk_1` FOREIGN KEY (`ConfID`) REFERENCES `conference` (`ConfID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `conferencetags`
+  ADD CONSTRAINT `conferencetags_ibfk_1` FOREIGN KEY (`ConfID`) REFERENCES `conference` (`ConfID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Tablo kısıtlamaları `submissions`
 --
 ALTER TABLE `submissions`
-  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`ConfID`) REFERENCES `conference` (`ConfID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`ConfID`) REFERENCES `conference` (`ConfID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Tablo kısıtlamaları `userlog`
 --
 ALTER TABLE `userlog`
-  ADD CONSTRAINT `userlog_ibfk_3` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `userlog_ibfk_1` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Tablo kısıtlamaları `usersinfo`
 --
 ALTER TABLE `usersinfo`
-  ADD CONSTRAINT `usersinfo_ibfk_4` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usersinfo_ibfk_1` FOREIGN KEY (`AuthenticationID`) REFERENCES `users` (`AuthenticationID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
