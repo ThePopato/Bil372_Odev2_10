@@ -2,12 +2,14 @@
 
 if(isset($_POST['search']))
 {
-    $valueToSearch = $_POST['nameSearch'];
-    // search in all table columns
-    // using concat mysql function
-    $query = "SELECT * FROM `usersinfo` WHERE `Name` LIKE '%".$valueToSearch."%'";
-    $search_result = filterTable($query);
-    
+	if(!empty($_POST['filterBox'])) {
+        $selected = $_POST['filterBox'];
+		$valueToSearch = $_POST['searchValue'];
+		// search in all table columns
+		// using concat mysql function
+		$query = "SELECT * FROM `usersinfo` WHERE `".$selected."` LIKE '%".$valueToSearch."%'";
+		$search_result = filterTable($query);
+    } 
 }
  else {
     $query = "SELECT * FROM `usersinfo`";
@@ -38,9 +40,18 @@ function filterTable($query)
     <body>
         
         <form action="adminDisplayUsers.php" method="post">
-            <input type="text" name="nameSearch" placeholder="Filter For Name"><br><br>
-            <input type="submit" name="search" value="Filter"><br><br>
-            
+			
+			<label for="FilterBox">Choose a filter:</label>
+			<select name="filterBox" id="filterBox">
+				<option value="Name">Name</option>
+				<option value="LastName">Lastname</option>
+				<option value="City">City</option>
+			</select>
+			<br><br>
+			<input type="text" name="searchValue" placeholder="Filter For Name"><br><br>
+			<input type="submit" name="search" value="Filter"><br><br>
+
+
             <table>
                 <tr>
                     <th>Title</th>
