@@ -31,7 +31,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <br></br>
         <a href="index_user.php" class="btn btn-danger">Users</a>
         <br></br>
-        <a href="usersinfo_index.php" class="btn btn-danger">User Information</a>
+        <a href="index_usersinfo.php" class="btn btn-danger">User Information</a>
         <br></br>
         <a href="adminDisplayUsers.php" class="btn btn-danger">User Display</a>
         <br></br>
