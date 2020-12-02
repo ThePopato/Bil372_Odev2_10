@@ -1,0 +1,13 @@
+1.)xampp'i bilgisayarımıza kuruyoruz
+https://www.apachefriends.org/download.html
+2.)github hesabımızdan final version dosyasını indiriyoruz
+3.)phpmyadmin hesabı açıyoruz ve içe aktar butonundan odev2.sql'i içeri aktarıyoruz
+4.)Database'imiz oluştu
+5.)Bilgisayarımızdan C:\xampp\htdocs'a gidiyor ve burada x adında bir klasör oluşturuyoruz
+6.)final version dosyasının içindeki .sql uzantılı dosya hariç
+C:\xampp\htdocs içerisinde oluşturduğumuz x klasörü içine atıyoruz.
+7.)Tarayıcımzdan localhost/x/login.php adresine giderek ilk register'ımızı oluşturabiliriz.
+8.)Login yapıp programı kullanabiliriz
+NOT: Database'mizin script'ini projemiz içerisindeki odev2.sql dosyasından görebilirsiniz  
+
+
